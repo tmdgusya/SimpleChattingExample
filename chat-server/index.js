@@ -12,12 +12,12 @@ const io = new Server(server, {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.send("Hello World");
 });
 
 io.on("connection", (socket) => {
-  socket.on("sendMessage", (message) => {
-    io.emit("sendMessage", message);
+  socket.on("sendMessage", ({ name, chat }) => {
+    io.emit("sendMessage", { name, chat });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
