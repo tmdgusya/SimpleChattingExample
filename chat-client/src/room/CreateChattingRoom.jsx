@@ -38,10 +38,8 @@ export const ChattingRoomList = () => {
   };
 
   const createRoom = () => {
-    console.log("create");
-    //TODO POST API
     postFetch("rooms", { room: roomName }).then(({ data }) => {
-      console.log(data);
+      setRoomName("");
       handleClose();
     });
   };
@@ -67,7 +65,7 @@ export const ChattingRoomList = () => {
         return (
           <RoomBox key={index}>
             <RoomName>{room.name}</RoomName>
-            <RoomUser>방장: {room.user}</RoomUser>
+            <RoomUser>방장: {room.nickname}</RoomUser>
           </RoomBox>
         );
       })}
