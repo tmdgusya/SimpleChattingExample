@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getFetch, postFetch } from "../utils/apiClient";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
@@ -12,6 +12,7 @@ import {
   useStyles,
 } from "./styled";
 import { Link } from "react-router-dom";
+import { socket } from "../App";
 
 export const ChattingRoomList = () => {
   const [rooms, setRooms] = useState([]);
@@ -22,6 +23,13 @@ export const ChattingRoomList = () => {
 
   useState(() => {
     getFetch("rooms").then(({ data: { rooms } }) => {
+      setRooms(rooms);
+    });
+  }, [rooms]);
+
+  useEffect(() => {
+    socket.on("getChattingRooms", ({ rooms }) => {
+      console.log(rooms);
       setRooms(rooms);
     });
   }, [rooms]);
@@ -39,10 +47,9 @@ export const ChattingRoomList = () => {
   };
 
   const createRoom = () => {
-    postFetch("rooms", { room: roomName }).then(({ data }) => {
-      setRoomName("");
-      handleClose();
-    });
+    socket.emit(`createChattingRoom`, { room: roomName, user_id: 1 });
+    setRoomName("");
+    handleClose();
   };
 
   const ModalComponent = (

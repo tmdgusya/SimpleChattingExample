@@ -25,12 +25,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.post("/rooms", async (req, res) => {
-  const roomName = req.body.room;
-  const data = await model.Room.create({ name: roomName, user_id: 1 });
-  res.send(data);
-});
-
 app.get("/rooms", async (req, res) => {
   const getRoomsQuery = `select p.*, u.nickname from rooms as p inner join users as u on u.id = p.user_id;`;
   const result = await sequelize.query(getRoomsQuery, {
@@ -71,6 +65,15 @@ io.on("connection", (socket) => {
       chat,
       user_id,
     });
+  });
+  socket.on("createChattingRoom", async ({ room, user_id }) => {
+    const data = await model.Room.create({ name: room, user_id });
+    const getRoomsQuery = `select p.*, u.nickname from rooms as p inner join users as u on u.id = p.user_id;`;
+    const result = await sequelize.query(getRoomsQuery, {
+      type: QueryTypes.SELECT,
+      row: true,
+    });
+    io.emit("getChattingRooms", { rooms: result });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
