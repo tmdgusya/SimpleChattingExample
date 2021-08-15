@@ -12,6 +12,7 @@ export const ChattingRoomBox = styled.div`
 export const RoomBox = styled.div`
   display: flex;
   border: 1px solid black;
+  padding-left: 10px;
 `;
 
 export const RoomName = styled.h3``;
