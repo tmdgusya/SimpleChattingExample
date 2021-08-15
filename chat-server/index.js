@@ -4,7 +4,8 @@ const http = require("http");
 const server = http.createServer(app);
 const cors = require("cors");
 const { Server } = require("socket.io");
-const sequelize = require("./model").sequelize;
+const model = require("./model");
+const sequelize = model.sequelize;
 
 sequelize.sync();
 
@@ -23,9 +24,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.post("/rooms", (req, res) => {
-  //TODO 서버에 방을 만들 수 있도록 한다.
-  //Response 로 방목록을 알려준다.
+app.post("/rooms", async (req, res) => {
+  const roomName = req.body.room;
+  const data = await model.Room.create({ name: roomName, user_id: 1 });
+  res.send(data);
 });
 
 app.get("/rooms", (req, res) => {
