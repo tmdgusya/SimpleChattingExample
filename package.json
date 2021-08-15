@@ -1,0 +1,27 @@
+{
+  "name": "simplechattingexample",
+  "version": "1.0.0",
+  "description": "simple chatting app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmdgusya/SimpleChattingExample.git"
+  },
+  "author": "roach",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tmdgusya/SimpleChattingExample/issues"
+  },
+  "homepage": "https://github.com/tmdgusya/SimpleChattingExample#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
