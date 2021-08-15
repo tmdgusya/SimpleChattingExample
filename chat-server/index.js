@@ -59,10 +59,18 @@ app.get("/rooms/:id", async (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("sendMessage", ({ name, chat, room_id, user_id }) => {
-    //TODO DB 에 MESSAGE 를 저장하자, room_id, user_id, chat async 로 한다.
-    model.Message.create({ content: chat, user_id, room_id });
-    io.emit("receiveMessage", { name, chat, user_id });
+  socket.on("sendMessage", async ({ name, chat, room_id, user_id }) => {
+    const message = await model.Message.create({
+      content: chat,
+      user_id,
+      room_id,
+    });
+    io.emit(`receiveMessage${room_id}`, {
+      id: message.id,
+      name,
+      chat,
+      user_id,
+    });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");

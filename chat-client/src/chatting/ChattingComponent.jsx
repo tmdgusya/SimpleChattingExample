@@ -26,10 +26,10 @@ export const ChattingComponent = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("receiveMessage", ({ name, chat }) => {
-      setMessageBox([...messageBox, { name, chat }]);
+    socket.on(`receiveMessage${id}`, ({ name, chat }) => {
+      setMessageBox([...messageBox, { chat, name }]);
     });
-  }, []);
+  }, [messageBox]);
 
   const onChangeChat = (e) => {
     setChat(e.target.value);
