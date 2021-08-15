@@ -64,8 +64,8 @@ export const ChattingRoomList = () => {
     <ChattingRoomBox>
       {rooms?.map((room) => {
         return (
-          <Link to={{ pathname: `/chat/${room.id}` }}>
-            <RoomBox key={room.id}>
+          <Link key={room.id} to={{ pathname: `/chat/${room.id}` }}>
+            <RoomBox>
               <RoomName>{room.name}</RoomName>
               <RoomUser>방장: {room.nickname}</RoomUser>
             </RoomBox>
