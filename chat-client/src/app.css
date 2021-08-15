@@ -3,3 +3,8 @@ h3 {
     "돋움", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
