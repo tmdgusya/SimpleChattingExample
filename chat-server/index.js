@@ -43,8 +43,19 @@ app.get("/rooms", async (req, res) => {
 });
 
 app.get("/rooms/:id", async (req, res) => {
-  const id = req.query.id;
-  console.log(id);
+  const room_id = req.params.id;
+
+  const getRoomsAndUserQuery = `
+  select m.content as chat, u.nickname as name
+  from messages as m
+  inner join users as u on u.id = m.user_id
+  where m.room_id = ${room_id};`;
+
+  const messsages = await sequelize.query(getRoomsAndUserQuery, {
+    type: QueryTypes.SELECT,
+    row: true,
+  });
+  res.send({ messsages });
 });
 
 io.on("connection", (socket) => {
