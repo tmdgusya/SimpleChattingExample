@@ -2,6 +2,16 @@
 
 ![image](https://user-images.githubusercontent.com/57784077/129486339-dd14d15a-4e3f-4a01-b5cc-bc76f139cbc7.png)
 
+## 방만들기
+
+![create_room](https://user-images.githubusercontent.com/57784077/129489523-8925a552-50b8-486a-a2f7-adb97fe987a0.gif)
+
+## 채팅 (같은 방에서만 공유됨)
+
+![chatting](https://user-images.githubusercontent.com/57784077/129489737-82e1203b-223f-49c1-99b9-73ec4e3d21b0.gif)
+
+## 실시간 방끼리 채팅
+
 # 백엔드
 
 - Socket IO (JS)
