@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getFetch } from "../utils/apiClient";
+import { getFetch, postFetch } from "../utils/apiClient";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import {
@@ -40,6 +40,9 @@ export const ChattingRoomList = () => {
   const createRoom = () => {
     console.log("create");
     //TODO POST API
+    postFetch("rooms", { room: roomName }).then(({ data }) => {
+      console.log(data);
+    });
   };
 
   const ModalComponent = (
