@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
+import { socket } from "../App";
 import {
   ChatBox,
   ChattingBox,
@@ -10,8 +10,6 @@ import {
   NameInput,
   UserBox,
 } from "./styeld";
-
-const socket = io.connect("http://localhost:8080");
 
 export const ChattingComponent = () => {
   const [chat, setChat] = useState("");
