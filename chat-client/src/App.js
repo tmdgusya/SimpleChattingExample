@@ -11,7 +11,7 @@ function App() {
       <Route path={`/room_list`}>
         <ChattingRoomList />
       </Route>
-      <Route path={`/chat`}>
+      <Route path={`/chat/:id`}>
         <ChattingComponent />
       </Route>
     </BrowserRouter>

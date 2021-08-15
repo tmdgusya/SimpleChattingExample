@@ -44,6 +44,11 @@ app.get("/rooms", async (req, res) => {
   });
 });
 
+app.get("/rooms/:id", async (req, res) => {
+  const id = req.query.id;
+  console.log(id);
+});
+
 io.on("connection", (socket) => {
   socket.on("sendMessage", ({ name, chat }) => {
     io.emit("receiveMessage", { name, chat });

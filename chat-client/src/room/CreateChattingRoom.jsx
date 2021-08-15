@@ -11,6 +11,7 @@ import {
   RoomUser,
   useStyles,
 } from "./styled";
+import { Link } from "react-router-dom";
 
 export const ChattingRoomList = () => {
   const [rooms, setRooms] = useState([]);
@@ -61,12 +62,14 @@ export const ChattingRoomList = () => {
 
   return (
     <ChattingRoomBox>
-      {rooms?.map((room, index) => {
+      {rooms?.map((room) => {
         return (
-          <RoomBox key={index}>
-            <RoomName>{room.name}</RoomName>
-            <RoomUser>방장: {room.nickname}</RoomUser>
-          </RoomBox>
+          <Link to={{ pathname: `/chat/${room.id}` }}>
+            <RoomBox key={room.id}>
+              <RoomName>{room.name}</RoomName>
+              <RoomUser>방장: {room.nickname}</RoomUser>
+            </RoomBox>
+          </Link>
         );
       })}
       <CreateRoomButton type="button" onClick={handleOpen}>
