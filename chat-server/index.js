@@ -17,7 +17,8 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("sendMessage", ({ name, chat }) => {
-    io.emit("sendMessage", { name, chat });
+    console.log(name, chat);
+    io.emit("receiveMessage", { name, chat });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
