@@ -15,6 +15,7 @@ const io = new Server(server, {
   },
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -28,7 +29,12 @@ app.post("/rooms", (req, res) => {
 });
 
 app.get("/rooms", (req, res) => {
-  //TODO 방목록을 가져다 준다.
+  res.send({
+    rooms: [
+      { name: "로치의 채팅방", user: "roach" },
+      { name: "로치의 채팅방", user: "roach" },
+    ],
+  });
 });
 
 io.on("connection", (socket) => {
