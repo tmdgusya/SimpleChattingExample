@@ -1,3 +1,5 @@
+import "./app.css";
+
 const { ChattingComponent } = require("./chatting/ChattingComponent");
 
 function App() {

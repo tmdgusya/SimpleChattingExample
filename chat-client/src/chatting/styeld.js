@@ -14,12 +14,15 @@ export const MessageBoxDiv = styled.div`
   overflow: scroll;
 `;
 
-export const ChatBox = styled.h3`
-  with: 200px;
+export const ChatBox = styled.p`
+  width: 200px;
+  height: auto;
+  overflow-wrap: anywhere;
   padding: 3px;
   margin-left: 10px;
   background: #dfe7fd;
   border-radius: 10px;
+  line-height: 30px;
 `;
 
 export const UserBox = styled.h3`
