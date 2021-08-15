@@ -42,6 +42,7 @@ export const ChattingRoomList = () => {
     //TODO POST API
     postFetch("rooms", { room: roomName }).then(({ data }) => {
       console.log(data);
+      handleClose();
     });
   };
 
