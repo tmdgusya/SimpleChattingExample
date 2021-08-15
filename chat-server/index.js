@@ -11,7 +11,6 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("sendMessage", (message) => {
-    console.log("message: ", message);
     io.emit("sendMessage", message);
   });
   socket.on("disconnect", () => {
