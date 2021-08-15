@@ -6,7 +6,6 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const sequelize = require("./model").sequelize;
 
-//TODO 디비를 연동하자.
 sequelize.sync();
 
 const io = new Server(server, {
@@ -15,6 +14,9 @@ const io = new Server(server, {
     credentials: true,
   },
 });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello World");
