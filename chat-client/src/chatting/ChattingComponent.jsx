@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { socket } from "../App";
+import { getFetch } from "../utils/apiClient";
 import {
   ChatBox,
   ChattingBox,
@@ -19,10 +20,16 @@ export const ChattingComponent = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    getFetch(`rooms/${id}`).then(({ data: { messsages } }) => {
+      setMessageBox(messsages);
+    });
+  }, []);
+
+  useEffect(() => {
     socket.on("receiveMessage", ({ name, chat }) => {
       setMessageBox([...messageBox, { name, chat }]);
     });
-  });
+  }, []);
 
   const onChangeChat = (e) => {
     setChat(e.target.value);
