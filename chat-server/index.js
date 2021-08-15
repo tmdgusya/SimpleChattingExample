@@ -32,8 +32,6 @@ app.post("/rooms", async (req, res) => {
 });
 
 app.get("/rooms", async (req, res) => {
-  //TODO 이것도 소켓으로 꽂아야 된다.
-  //이건 소켓 브로드 캐스트로 전체 다보이게 꽂아야 된다.
   const getRoomsQuery = `select p.*, u.nickname from rooms as p inner join users as u on u.id = p.user_id;`;
   const result = await sequelize.query(getRoomsQuery, {
     type: QueryTypes.SELECT,
@@ -50,8 +48,10 @@ app.get("/rooms/:id", async (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("sendMessage", ({ name, chat }) => {
-    io.emit("receiveMessage", { name, chat });
+  socket.on("sendMessage", ({ name, chat, room_id, user_id }) => {
+    //TODO DB 에 MESSAGE 를 저장하자, room_id, user_id, chat async 로 한다.
+    model.Message.create({ content: chat, user_id, room_id });
+    io.emit("receiveMessage", { name, chat, user_id });
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
