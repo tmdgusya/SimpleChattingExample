@@ -29,7 +29,6 @@ export const ChattingRoomList = () => {
 
   useEffect(() => {
     socket.on("getChattingRooms", ({ rooms }) => {
-      console.log(rooms);
       setRooms(rooms);
     });
   }, [rooms]);

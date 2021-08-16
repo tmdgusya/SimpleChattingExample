@@ -8,6 +8,7 @@ const model = require("./model");
 const { QueryTypes } = require("sequelize");
 const RoomRouter = require("./route/room");
 const sequelize = model.sequelize;
+const passport = require("./passport");
 
 sequelize.sync();
 
@@ -19,6 +20,7 @@ const io = new Server(server, {
 });
 
 app.use(cors());
+app.use(passport.initialize());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,6 +29,24 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", RoomRouter);
+
+app.get(
+  "/auth/kakao",
+  passport.authenticate("kakao", { session: false }),
+  (req, res) => {
+    console.log(123123);
+    res.send(req.user);
+  }
+);
+
+app.get(
+  "/oauth/callback",
+  passport.authenticate("kakao", { session: false }),
+  (req, res) => {
+    console.log("!@#!#@");
+    res.send(req.user);
+  }
+);
 
 io.on("connection", (socket) => {
   socket.on("sendMessage", async ({ name, chat, room_id, user_id }) => {
